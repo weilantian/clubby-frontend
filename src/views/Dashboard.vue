@@ -8,7 +8,7 @@
         <aside-menu/>
       </el-aside>
       <el-container>
-        <el-main><router-view/></el-main>
+        <el-main><transition name="fade"><router-view/></transition></el-main>
         <el-footer>@2021 Clubby</el-footer>
       </el-container>
     </el-container>
@@ -25,5 +25,12 @@ export default {
 </script>
 
 <style scoped>
+.fade-enter-from, .fade-leave-to {
+  opacity:0;
+  transform: translateY(2em);
+}
 
+.fade-enter-active, .fade-leave-active {
+  transition: all 0.3s ease;
+}
 </style>

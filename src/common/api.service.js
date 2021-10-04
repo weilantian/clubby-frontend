@@ -12,33 +12,42 @@ const ApiService = {
     },
     query(resource,params) {
         return axios.get(resource,params).catch(error=> {
-            ElMessage.error("网络连接出现问题，请刷新本页后重试。")
-            throw new Error(`[CLUBBY] ApiService ${error}`);
+            if (!error.response) {
+                ElMessage.error("网络连接出现问题，请刷新本页后重试。")
+            }
+            throw error
         })
     },
     get(resource,slug="") {
         return axios.get(`${resource}/${slug}`).catch((error)=> {
-            ElMessage.error("网络连接出现问题，请刷新本页后重试。")
-            throw new Error(`[CLUBBY] ApiService ${error}`)
-
+            if (!error.response) {
+                ElMessage.error("网络连接出现问题，请刷新本页后重试。")
+            }
+            throw error
         })
     },
     post(resource,params) {
         return axios.post(`${resource}`,params).catch((error)=> {
-            ElMessage.error("网络连接出现问题，请刷新本页后重试。")
-            throw new Error(`[CLUBBY] ApiService ${error}`)
+            if (!error.response) {
+                ElMessage.error("网络连接出现问题，请刷新本页后重试。")
+            }
+            throw error
         })
     },
     update(resource,slug,params) {
         return axios.patch(`${resource}/${slug}`,params).catch((error)=> {
-            ElMessage.error("网络连接出现问题，请刷新本页后重试。")
-            throw new Error(`[CLUBBY] ApiService ${error}`)
+            if (!error.response) {
+                ElMessage.error("网络连接出现问题，请刷新本页后重试。")
+            }
+            throw error
         })
     },
     delete(resource) {
         return axios.delete(resource).catch(error=> {
-            ElMessage.error("网络连接出现问题，请刷新本页后重试。")
-            throw new Error(`[CLUBBY] ApiService ${error}`)
+            if (!error.response) {
+                ElMessage.error("网络连接出现问题，请刷新本页后重试。")
+            }
+            throw error
         })
     }
 }
@@ -90,6 +99,11 @@ export const AuthService = {
     createAccount(name,email,password,sex,role,roleName) {
         return ApiService.post('auth/signUp',{
             name,email,password,sex,role,roleName
+        })
+    },
+    activate(newPassword) {
+        return ApiService.post('auth/activate',{
+            newPassword
         })
     }
 }

@@ -48,7 +48,7 @@ const routes = [
   },
   {
     path:'/activate',
-    component: import(/* webpackChunkName: "activateAccount"*/ '../views/ActivateAccount')
+    component: ()=>import(/* webpackChunkName: "activateAccount"*/ '../views/ActivateAccount')
   }
 
 ]
@@ -59,7 +59,12 @@ const router = createRouter({
 })
 
 router.beforeEach((to,from,next)=> {
-  Promise.all([store.dispatch('checkAuth')]).then(()=>next())
+  const autoNavigate = to.path !== '/activate'
+  Promise.all([store.dispatch('checkAuth',autoNavigate)]).then(()=>next())
+
+
+
+
 })
 
 export default router
