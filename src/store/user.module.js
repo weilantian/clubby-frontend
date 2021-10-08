@@ -52,8 +52,8 @@ const userModule = {
         createUser({commit},payload) {
             return new Promise(resolve=> {
                 commit('fetchStart')
-                const {email,name,sex,role,roleName} = payload
-                AuthService.createAccount(email,name,sex,role,roleName).then(({data})=> {
+                const {email,name,sex,role,roleName,password} = payload
+                AuthService.createAccount(name,email,password,sex,role,roleName).then(({data})=> {
                     commit('fetchEnd',data.data)
                     resolve(data.data)
                 }).catch(error=> {
