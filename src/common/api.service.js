@@ -100,7 +100,7 @@ export const UserService = {
             email,name,sex,role,roleName
         })
     },
-    updateCurrentUser(email,name,sex,role,roleName) {
+    updateCurrentUser({email,name,sex,role,roleName}) {
         return ApiService.update('user','current',{
             email,name,sex,role,roleName
         })
@@ -127,7 +127,7 @@ export const AuthService = {
         return ApiService.post('auth/activate',{
             newPassword
         })
-    }
+    },
 }
 
 export default ApiService

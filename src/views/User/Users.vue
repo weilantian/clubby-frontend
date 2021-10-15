@@ -62,6 +62,9 @@
 <script>
 import { mapGetters } from "vuex";
 import useDecodeRoles from "@/composables/useTextDecoder";
+
+//TODO:添加一个忘记密码的功能
+
 export default {
   name: "People",
   computed: {

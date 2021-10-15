@@ -1,6 +1,6 @@
 <template>
 <div>
-  <el-page-header title="返回" content="新建课程"></el-page-header>
+  <el-page-header @back="goBack" title="返回" content="新建课程"></el-page-header>
   <el-divider/>
   <el-form :rules="rules" label-width="140px" ref="formRef" :model="form">
     <el-form-item label="标题" prop="name">

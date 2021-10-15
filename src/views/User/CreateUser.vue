@@ -3,7 +3,7 @@
 <div>
   <el-page-header label-width="120px" content="新建社员档案" title="返回" @back="goBack" />
   <el-divider/>
-  <el-form label-width="100px" :rules="inputRules" label-position="right" ref="form" :model="form">
+  <el-form label-width="100px" :rules="userEditRules" label-position="right" ref="form" :model="form">
     <el-form-item prop="name" label="姓名">
       <el-input v-model="form.name" />
     </el-form-item>
@@ -59,6 +59,7 @@
 
 import { ElMessage } from 'element-plus'
 import {mapGetters} from "vuex";
+import useUserEditRules from "@/composables/useUserEditRules";
 
 export default {
   name: "CreateUser.vue",
@@ -111,6 +112,10 @@ export default {
   computed: {
     ...mapGetters('user',["isUserLoading"])
   },
+  setup() {
+    const {userEditRules} = useUserEditRules()
+    return {userEditRules}
+  },
   data() {
     return {
       form: {
@@ -122,31 +127,6 @@ export default {
         sex:""
       },
       createUserSuccess: false,
-      inputRules: {
-        name:[{
-          required: true,
-          message: "请输入姓名",
-          trigger:'blur'
-        }],roleName: [{
-          required: true,
-          message: "请输入社员角色 如：社长 副市长 管理员 社员 等"
-    }],
-        sex: [{
-          required: true,
-          message:"请选择性别"
-        }],
-        email: [{
-          required: true,
-          message:"请输入邮箱"
-        }],
-        password: [{
-          required: true,
-          message:"请输入初始密码"
-        }],role: [{
-          required: true,
-          message:"请选择账户类型"
-    }]
-      }
     }
   }
 }

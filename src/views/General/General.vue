@@ -108,7 +108,7 @@
           </template>
           <div class="count-card__body">
             <!--              <h1>32</h1>-->
-            <p>暂无</p>
+            <p style="color:var(--el-color-info)">暂无</p>
           </div>
         </el-card>
       </el-col>
@@ -122,7 +122,7 @@
           </template>
           <div class="count-card__body">
             <!--              <h1>32</h1>-->
-            <p>暂无</p>
+            <p style="color:var(--el-color-info)">暂无</p>
           </div>
         </el-card>
       </el-col>

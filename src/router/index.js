@@ -49,6 +49,16 @@ const routes = [
         path: 'course/create',
         name:"CreateCourse",
         component: ()=> import(/* webpackChunkName: "createCourse"*/ "../views/Class/CreateCourse")
+      },
+      {
+        path: 'profile',
+        name:"Profile",
+        component: ()=> import(/* webpackChunkName: "profile"*/ "../views/Profile/Profile")
+      },
+      {
+        path:'profile/modify',
+        name: "ModifyProfile",
+        component: ()=> import(/* webpackChunkName: "profile"*/ "../views/Profile/EditProfile")
       }
     ]
   },

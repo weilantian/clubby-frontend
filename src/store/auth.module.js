@@ -12,7 +12,8 @@ const EMPTY_AUTH_STATE = {
         jwt:null
     },
     errors:null,
-    isAuthenticated: !!JwtService.getToken()
+    isAuthenticated: !!JwtService.getToken(),
+    fetchingAuthInfo:true
 }
 
 const authModule = {
@@ -31,22 +32,36 @@ const authModule = {
         },
         authError(state) {
             return state.errors
+        },
+        fetchingAuthInfo(state) {
+            return state.fetchingAuthInfo
         }
     },
     mutations: {
         setAuth(state,user) {
+            state.fetchingAuthInfo = false
             state.isAuthenticated = true
             Object.assign(state.user,user)
             state.errors = {}
             JwtService.saveToken(state.user.jwt)
         },
         setError(state,error) {
+            state.fetchingAuthInfo = false
            state.errors = error
         },
         purgeAuth(state) {
             Object.assign(state,EMPTY_AUTH_STATE)
             JwtService.deleteToken()
-        }
+        },
+        userOperationWillStart(state) {
+            state.fetchingAuthInfo = true
+        },
+        updateUserDidEnd(state,payload) {
+            state.fetchingAuthInfo = false
+            Object.keys(payload).map(key=> {
+                state.user[key] = payload[key]
+            })
+        },
     },
     actions: {
         async checkAuth(context, autoNavigate) {
@@ -103,6 +118,21 @@ const authModule = {
                 }).catch(({response})=> {
                     //TODO: CATCH DATA USE SET DATA
                     reject(response)
+                })
+            })
+        },
+        updateCurrentUser(context,payload) {
+            const {name,email,sex,role,roleName} = payload
+            context.commit('userOperationWillStart')
+            return new Promise(resolve=>{
+                UserService.updateCurrentUser({
+                    name,email,sex,role,roleName
+                }).then(({data})=> {
+                    context.commit('updateUserDidEnd',data.data)
+                    resolve(data.data)
+                }).catch(error=> {
+                    //TODO: CATCH DATA USE SET DATA
+                    throw new Error(error)
                 })
             })
         }
