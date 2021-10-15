@@ -43,23 +43,13 @@
               <el-button
                   size="mini"
                   type="primary"
-                  @click="handleDelete(scope.$index, scope.row)"
-              >详情</el-button
-              >
+                  @click="showDetail(scope.$index,scope.row)"
+              >详情</el-button>
               <el-button
                   size="mini"
 
                   @click="handleDelete(scope.$index, scope.row)"
               >出勤</el-button
-              >
-              <el-button size="mini" @click="handleEdit(scope.$index, scope.row)"
-              >编辑</el-button
-              >
-              <el-button
-                  size="mini"
-                  type="danger"
-                  @click="handleDelete(scope.$index, scope.row)"
-              >删除</el-button
               >
             </template>
           </el-table-column>
@@ -71,10 +61,15 @@
 
 <script>
 import { mapGetters } from "vuex";
+import useDecodeRoles from "@/composables/useTextDecoder";
 export default {
   name: "People",
   computed: {
     ...mapGetters('users',['users','isUsersLoading'])
+  },
+  setup() {
+    const {decodeRole,decodeSex} = useDecodeRoles()
+    return {decodeRole,decodeSex}
   },
   mounted() {
     this.fetchUsers()
@@ -85,34 +80,15 @@ export default {
     }
   },
   methods: {
-    decodeRole(role) {
-      const roleList = {
-        "ADMIN":"管理员",
-        "MEMBER":"成员"
-      }
-      return roleList[role]
-    },
-    decodeSex(sex) {
-      const sexList = {
-        "MALE":"男",
-        "FEMALE":"女",
-        "OTHER":"非二元",
-        "UNSET":"未设置"
-      }
-      return sexList[sex]
-    },
     fetchUsers() {
       this.$store.dispatch('users/fetchUsers')
-    },
-    handleEdit() {
-
-    },
-    handleDelete() {
-
     },
     filterHandler(value,row,column) {
       const property = column['property']
       return row[property] === value
+    },
+    showDetail(index,row) {
+      this.$router.push(`/dashboard/user/${row.id}`)
     }
   }
 }

@@ -16,8 +16,8 @@
       <el-input-number :min="1" v-model="form.designedMemberCount" type="textarea"></el-input-number>
     </el-form-item>
     <el-form-item>
-      <el-button @click="onSubmit" type="primary">保存信息</el-button>
-      <el-button @click="goBack" >返回</el-button>
+      <el-button :loading="clubInfoLoading" @click="onSubmit" type="primary">保存信息</el-button>
+      <el-button :disabled="clubInfoLoading" @click="goBack" >返回</el-button>
     </el-form-item>
   </el-form>
 </div>

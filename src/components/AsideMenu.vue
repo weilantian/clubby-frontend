@@ -8,8 +8,15 @@
         <span>基本概要</span>
       </template>
     </el-menu-item>
-
-    <el-menu-item index="/dashboard/class">
+    <el-menu-item index="/dashboard/user">
+      <template #title>
+        <el-icon size="24">
+          <box-icon name="group"></box-icon>
+        </el-icon>
+        <span>人员管理</span>
+      </template>
+    </el-menu-item>
+    <el-menu-item index="/dashboard/course">
       <template #title>
         <el-icon size="24">
           <box-icon name="list-ul"></box-icon>
@@ -17,22 +24,14 @@
         <span>课程管理</span>
       </template>
     </el-menu-item>
-    <el-menu-item index="/dashboard/schedule">
-      <template #title>
-        <el-icon size="24">
-          <box-icon name="calendar"></box-icon>
-        </el-icon>
-        <span>日程管理</span>
-      </template>
-    </el-menu-item>
-    <el-menu-item index="/dashboard/user">
-    <template #title>
-      <el-icon size="24">
-        <box-icon name="group"></box-icon>
-      </el-icon>
-      <span>人员管理</span>
-    </template>
-  </el-menu-item>
+<!--    <el-menu-item index="/dashboard/schedule">-->
+<!--      <template #title>-->
+<!--        <el-icon size="24">-->
+<!--          <box-icon name="calendar"></box-icon>-->
+<!--        </el-icon>-->
+<!--        <span>日程管理</span>-->
+<!--      </template>-->
+<!--    </el-menu-item>-->
     <el-menu-item index="/dashboard/profile">
       <template #title>
         <el-icon size="24">

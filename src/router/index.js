@@ -31,14 +31,24 @@ const routes = [
         component: ()=> import(/* webpackChunkName: "userDetail"*/'../views/User/UserDetail.vue')
       },
       {
-        path: 'user/:id/modify',
-        name:'UserModify',
-        component: ()=> import(/* webpackChunkName: "userModify"*/'../views/User/EditUserDetail.vue')
-      },
-      {
         path: 'user/create',
         name:'CreateUser',
         component: ()=> import(/* webpackChunkName: "userCreate"*/ '../views/User/CreateUser.vue')
+      },
+      {
+        path: 'course',
+        name: 'Class',
+        component: ()=> import(/* webpackChunkName: "allClasses"*/ '../views/Class/Classes')
+      },
+      {
+        path: 'course/:id',
+        name:"CourseDetail",
+        component: ()=> import(/* webpackChunkName: "courseDetail")*/"../views/Class/CourseDetail.vue")
+      },
+      {
+        path: 'course/create',
+        name:"CreateCourse",
+        component: ()=> import(/* webpackChunkName: "createCourse"*/ "../views/Class/CreateCourse")
       }
     ]
   },
@@ -49,6 +59,10 @@ const routes = [
   {
     path:'/activate',
     component: ()=>import(/* webpackChunkName: "activateAccount"*/ '../views/ActivateAccount')
+  },
+  {
+    path: '/login',
+    component: ()=>import(/* webpackChunkName: "login"*/ '../views/Login')
   }
 
 ]
@@ -59,7 +73,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to,from,next)=> {
-  const autoNavigate = to.path !== '/activate'
+  const autoNavigate = to.path !== '/activate' && to.path!=='/login'
   Promise.all([store.dispatch('checkAuth',autoNavigate)]).then(()=>next())
 
 

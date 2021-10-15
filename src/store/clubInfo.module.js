@@ -11,7 +11,7 @@ const EMPTY_INFO_STATE = {
         memberCount:0,
         adminCount:0,
     },
-    isLoading:true
+    isLoading:false
 }
 
 const clubInfoModule = {

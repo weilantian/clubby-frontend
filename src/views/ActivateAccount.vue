@@ -13,7 +13,8 @@
       <el-input v-model="form.password" show-password></el-input>
     </el-form-item>
     <el-form-item class="button_wrapper">
-      <el-button @click="activateAccount">激活账号</el-button>
+      <el-button type="primary" @click="activateAccount">激活账号</el-button>
+      <el-button @click="logout">退出登陆</el-button>
     </el-form-item>
   </el-form>
 </div>
@@ -24,10 +25,14 @@
 
 <script>
 import {mapGetters} from "vuex";
-
+import {ElMessageBox} from "element-plus";
+//TODO:刷新后仍然显示名字。
 
 export default {
   name: "ActivateAccount.vue",
+  mounted() {
+
+  },
   data() {
     return {
       form: {
@@ -42,8 +47,19 @@ export default {
   methods: {
     activateAccount() {
       this.$store.dispatch('activateAccount',{password:this.form.password}).then(()=> {
+        //TODO:这里加个Message Box
         this.$router.push('/')
       })
+    },
+    logout() {
+      ElMessageBox.confirm('你即将登出Clubby,确定要继续吗？','登出',{
+        confirmButtonText:"登出",
+        cancelButtonText:"取消",
+        type:'warning'
+      }).then(()=> {
+        this.$store.dispatch('logout')
+      })
+
     }
   },
   watch:{

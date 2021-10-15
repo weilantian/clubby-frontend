@@ -11,7 +11,7 @@ const userModule = {
             jwt: null,
             email:null
         },
-        isLoading:true,
+        isLoading:false,
     },
     getters: {
         user(state) {
@@ -37,11 +37,11 @@ const userModule = {
                 commit('fetchEnd',data.data)
             })
         },
-        updateUser({commit},payload) {
+        updateUser({commit,state},payload) {
             return new Promise(resolve => {
                 commit('fetchStart')
-                const {id,email,name,sex,role,roleName} = payload
-                UserService.updateUser(id,email,name,sex,role,roleName).then(({data})=> {
+                const {email,name,sex,role,roleName} = payload
+                UserService.updateUser(state.user.id,email,name,sex,role,roleName).then(({data})=> {
                     commit('fetchEnd',data.data)
                     resolve(data.data)
                 }).catch(error=> {

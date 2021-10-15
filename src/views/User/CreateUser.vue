@@ -32,8 +32,8 @@
       </el-select>
     </el-form-item>
     <el-form-item>
-      <el-button @click="onSubmit" type="primary">创建</el-button>
-      <el-button @click="goBack">返回</el-button>
+      <el-button :loading="isUserLoading" @click="onSubmit" type="primary">创建</el-button>
+      <el-button :disabled="isUserLoading" @click="goBack">返回</el-button>
     </el-form-item>
   </el-form>
   <el-dialog
@@ -58,6 +58,7 @@
 
 
 import { ElMessage } from 'element-plus'
+import {mapGetters} from "vuex";
 
 export default {
   name: "CreateUser.vue",
@@ -107,7 +108,9 @@ export default {
       this.form.password = result
     },
   },
-
+  computed: {
+    ...mapGetters('user',["isUserLoading"])
+  },
   data() {
     return {
       form: {

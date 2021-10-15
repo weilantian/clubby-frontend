@@ -42,8 +42,8 @@ const ApiService = {
             throw error
         })
     },
-    delete(resource) {
-        return axios.delete(resource).catch(error=> {
+    delete(resource,slug) {
+        return axios.delete(`${resource}/${slug}`).catch(error=> {
             if (!error.response) {
                 ElMessage.error("网络连接出现问题，请刷新本页后重试。")
             }
@@ -60,6 +60,28 @@ export const ClubInfoService = {
         return ApiService.update('info','',{
             name,description,type,designedMemberCount
         })
+    }
+}
+
+export const CourseService = {
+    getAllCourses() {
+        return ApiService.get('course')
+    },
+    getCourse(id) {
+        return ApiService.get('course',id)
+    },
+    createCourse({name,content,fileLinks,published}) {
+        return ApiService.post('course',{
+            name,content,fileLinks,published
+        })
+    },
+    updateCourse(id,{name,content,fileLinks,published}) {
+        return ApiService.update('course',id,{
+            name,content,fileLinks,published
+        })
+    },
+    deleteCourse(id) {
+        return ApiService.delete('course',id)
     }
 }
 

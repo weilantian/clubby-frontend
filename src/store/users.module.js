@@ -4,7 +4,7 @@ const usersModule = {
     namespaced:true,
     state: {
         users:[],
-        isLoading: true
+        isLoading: false
     },
     getters: {
         isUsersLoading(state){

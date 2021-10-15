@@ -20,6 +20,9 @@ const authModule = {
         ...EMPTY_AUTH_STATE
     },
     getters: {
+        authRole(state) {
+          return state.user.role
+        },
         currentUser(state) {
             return state.user
         },
@@ -42,35 +45,41 @@ const authModule = {
         },
         purgeAuth(state) {
             Object.assign(state,EMPTY_AUTH_STATE)
+            JwtService.deleteToken()
         }
     },
     actions: {
-        checkAuth(context,autoNavigate) {
+        async checkAuth(context, autoNavigate) {
+
             if (JwtService.getToken()) {
                 console.log('ok')
                 ApiService.setHeader()
-                UserService.getCurrentUser().then(({data})=> {
-                    context.commit('setAuth',data.data)
+                UserService.getCurrentUser().then(({data}) => {
+                    context.commit('setAuth', data.data)
                 }).catch(async error => {
                     if (error.response) {
-                        context.commit('setError',error.response.data)
+                        context.commit('setError', error.response.data)
                         if (!autoNavigate) {
                             return
                         }
-                        if (error.response.data.code === 'ACCOUNT_NOT_ACTIVATED'){
+                        if (error.response.data.code === 'ACCOUNT_NOT_ACTIVATED') {
                             await router.push('/activate')
                         }
                         if (error.response.data.code === 'JWT_RESIGN_REQUIRED') {
-                            console.log("请重新登陆")
+                            await router.push('/login')
                         }
                     }
                 })
             } else {
-                console.log("请登录")
+                if (!autoNavigate) {
+                    return
+                }
+                await router.push('/login')
             }
         },
-        logout(context) {
+        async logout(context) {
             context.commit('purgeAuth')
+            await router.push('/login')
         },
         login(context,payload) {
             const {email,password} = payload

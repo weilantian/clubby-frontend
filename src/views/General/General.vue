@@ -76,39 +76,6 @@
       </el-col>
 
     </el-row>
-
-    <el-divider/>
-
-      <el-row  gutter="20">
-        <el-col :span="16">
-          <el-card class="box-card">
-            <template #header>
-              <div class="card-header">
-                <span>近期社团日程</span>
-
-              </div>
-            </template>
-            <div class="count-card__body">
-              <h1>32</h1>
-              <p>人</p>
-            </div>
-          </el-card>
-        </el-col>
-        <el-col :span="8">
-          <el-card class="box-card">
-            <template #header>
-              <div class="card-header">
-                <span>与你有关的待办事项</span>
-
-              </div>
-            </template>
-            <div class="count-card__body">
-              <h1>32</h1>
-              <p>人</p>
-            </div>
-          </el-card>
-        </el-col>
-      </el-row>
     <el-divider/>
     <el-row  gutter="20">
       <el-col>
@@ -127,6 +94,41 @@
       </el-col>
 
     </el-row>
+
+    <el-divider/>
+
+    <el-row  gutter="20">
+      <el-col :span="16">
+        <el-card class="box-card">
+          <template #header>
+            <div class="card-header">
+              <span>近期社团日程</span>
+
+            </div>
+          </template>
+          <div class="count-card__body">
+            <!--              <h1>32</h1>-->
+            <p>暂无</p>
+          </div>
+        </el-card>
+      </el-col>
+      <el-col :span="8">
+        <el-card class="box-card">
+          <template #header>
+            <div class="card-header">
+              <span>与你有关的待办事项</span>
+
+            </div>
+          </template>
+          <div class="count-card__body">
+            <!--              <h1>32</h1>-->
+            <p>暂无</p>
+          </div>
+        </el-card>
+      </el-col>
+    </el-row>
+
+
   </div>
 </template>
 
