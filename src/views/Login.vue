@@ -13,7 +13,7 @@
         <el-form-item>
           <div class="login-box__button-group">
             <el-button :loading="isLoading" @click="onSubmit">登陆</el-button>
-            <el-button type="text">忘记密码？</el-button>
+            <el-button type="text">帮助帮助帮助</el-button>
           </div>
 
         </el-form-item>
@@ -60,6 +60,9 @@ export default {
         }).then(()=> {
           this.isLoading = false
           this.$router.push('/dashboard/general')
+          // setTimeout(()=> this.$router.push('/dashboard/general')
+          // ,1000)
+
         }).catch((err)=> {
           this.isLoading = false
           const errCode = err.data.code

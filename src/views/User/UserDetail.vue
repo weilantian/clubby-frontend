@@ -3,7 +3,7 @@
   <el-page-header @back="goBack" title="返回" content="用户详情"></el-page-header>
   <el-divider/>
   <el-row justify="end">
-    <el-button  @click="editUser" :loading="isUserLoading" type="primary">修改信息</el-button>
+    <el-button v-if="authRole==='ADMIN'" :disabled="currentUser.id === user.id"  @click="editUser" :loading="isUserLoading" type="primary">修改信息</el-button>
     <el-button :loading="isUserLoading">刷新</el-button>
   </el-row>
   <el-divider/>
@@ -96,7 +96,8 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('user',['user','isUserLoading'])
+    ...mapGetters('user',['user','isUserLoading']),
+    ...mapGetters(['authRole','currentUser'])
   }
 }
 </script>

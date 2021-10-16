@@ -130,4 +130,28 @@ export const AuthService = {
     },
 }
 
+export const AttendanceService = {
+    createAttendanceRecord(attended) {
+        return ApiService.post('attendance',{
+            attended
+        })
+    },
+    getAttendanceRecord(id) {
+        return ApiService.get('attendance',id)
+    },
+    getAllAttendanceRecords() {
+        return ApiService.get('attendance')
+    },
+    addPersonToAttendanceRecord(id,userId) {
+        return ApiService.update(`attendance`,`${id}/add`,{
+            userId
+        })
+    },
+    removePersonFromAttendanceRecord(id,userId) {
+        return ApiService.update('attendance',`${id}/remove`,{
+            userId
+        })
+    }
+}
+
 export default ApiService

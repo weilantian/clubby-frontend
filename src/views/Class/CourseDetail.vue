@@ -3,7 +3,7 @@
   <el-page-header  @back="goBack" title="返回" content="课程详情"></el-page-header>
   <el-divider/>
   <el-row justify="end">
-    <el-button  @click="editCourse" :loading="isUserLoading" type="primary">修改信息</el-button>
+    <el-button v-if="authRole==='ADMIN'"  @click="editCourse" :loading="isUserLoading" type="primary">修改信息</el-button>
     <el-button @click="fetchCourse" :loading="isCourseLoading">刷新</el-button>
   </el-row>
   <el-divider/>
@@ -86,7 +86,8 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('course',['course','isCourseLoading'])
+    ...mapGetters('course',['course','isCourseLoading']),
+    ...mapGetters(['authRole'])
   }
 }
 </script>

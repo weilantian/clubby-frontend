@@ -7,6 +7,7 @@ import 'element-plus/dist/index.css'
 import 'boxicons'
 import ApiService from "@/common/api.service";
 
+
 ApiService.init()
 
 const app = createApp(App)

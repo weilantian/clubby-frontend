@@ -14,7 +14,7 @@
         courses.filter(data=> !search || data.name.includes(search))
 ">
           <el-table-column label="标题" prop="name"/>
-          <el-table-column label="状态" prop="published">
+          <el-table-column v-if="authRole==='ADMIN'" label="状态" prop="published">
             <template #default="scope">
               <div>
                 <el-tag :type="

@@ -13,7 +13,7 @@
         <el-icon size="24">
           <box-icon name="group"></box-icon>
         </el-icon>
-        <span>人员管理</span>
+        <span>社团人员</span>
       </template>
     </el-menu-item>
     <el-menu-item index="/dashboard/course">
@@ -21,7 +21,15 @@
         <el-icon size="24">
           <box-icon name="list-ul"></box-icon>
         </el-icon>
-        <span>课程管理</span>
+        <span>课程</span>
+      </template>
+    </el-menu-item>
+    <el-menu-item index="/dashboard/attendance">
+      <template #title>
+        <el-icon size="24">
+          <box-icon name="calendar"></box-icon>
+        </el-icon>
+        <span>考勤管理</span>
       </template>
     </el-menu-item>
 <!--    <el-menu-item index="/dashboard/schedule">-->

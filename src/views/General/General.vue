@@ -2,7 +2,7 @@
   <div class="home">
 
     <el-row justify="end">
-      <el-button type="primary">开始点名</el-button>
+      <el-button @click="$router.push('/dashboard/attendance/roll')" v-if="authRole==='ADMIN'" type="primary">开始点名</el-button>
       <el-button
         :loading="clubInfoLoading"
         @click="fetchClubInfo()" icon="el-icon-refresh">刷新</el-button></el-row>
@@ -14,7 +14,7 @@
             <template #header>
               <div class="card-header">
                 <span>社团总人数</span>
-                <el-button class="button" type="text">管理社员</el-button>
+                <el-button @click="$router.push('/dashboard/user')" v-if="authRole==='ADMIN'" class="button" type="text">管理社员</el-button>
               </div>
             </template>
             <div v-loading="clubInfoLoading" class="count-card__body">
@@ -59,7 +59,7 @@
           <template #header>
             <div class="card-header">
               <span>社团概要信息</span>
-              <el-button @click="$router.push('/dashboard/general/modify')" class="button" icon="el-icon-edit" type="text">编辑</el-button>
+              <el-button v-if="authRole==='ADMIN'" @click="$router.push('/dashboard/general/modify')" class="button" icon="el-icon-edit" type="text">编辑</el-button>
             </div>
           </template>
 
@@ -76,10 +76,10 @@
       </el-col>
 
     </el-row>
-    <el-divider/>
+    <el-divider v-if="authRole==='ADMIN'"/>
     <el-row  gutter="20">
       <el-col>
-        <el-card class="box-card">
+        <el-card v-if="authRole==='ADMIN'" class="box-card">
           <template #header>
             <div class="card-header">
               <span>收到的组员问答</span>
@@ -87,8 +87,9 @@
             </div>
           </template>
           <div class="count-card__body">
-            <h1>32</h1>
-            <p>人</p>
+<!--            <h1>32</h1>-->
+<!--            <p>人</p>-->
+            <p style="color:var(--el-color-info)">暂无</p>
           </div>
         </el-card>
       </el-col>
@@ -142,7 +143,8 @@ export default {
     this.fetchClubInfo()
   },
   computed: {
-    ...mapGetters('clubInfo',["clubInfoLoading","clubInfo"])
+    ...mapGetters('clubInfo',["clubInfoLoading","clubInfo"]),
+    ...mapGetters(['authRole'])
   },
   methods: {
     fetchClubInfo() {
@@ -165,8 +167,13 @@ export default {
   align-items: end;
   justify-content: center;
   & h1{
+    font-weight: 500;
     margin: 12px 0;
     font-size:2em;
+
+  }
+  * {
+    display:block;
   }
 }
 </style>

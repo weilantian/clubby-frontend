@@ -13,7 +13,8 @@ const EMPTY_AUTH_STATE = {
     },
     errors:null,
     isAuthenticated: !!JwtService.getToken(),
-    fetchingAuthInfo:true
+    fetchingAuthInfo:true,
+    didFetchAuthInfo:false
 }
 
 const authModule = {
@@ -41,7 +42,10 @@ const authModule = {
         setAuth(state,user) {
             state.fetchingAuthInfo = false
             state.isAuthenticated = true
-            Object.assign(state.user,user)
+            for(const key in user)
+            {
+                state.user[key] = user[key]
+            }
             state.errors = {}
             JwtService.saveToken(state.user.jwt)
         },
@@ -65,12 +69,16 @@ const authModule = {
     },
     actions: {
         async checkAuth(context, autoNavigate) {
-
+            if (context.state.didFetchAuthInfo)
+            {
+                return false;
+            }
             if (JwtService.getToken()) {
                 console.log('ok')
                 ApiService.setHeader()
                 UserService.getCurrentUser().then(({data}) => {
                     context.commit('setAuth', data.data)
+                    context.state.didFetchAuthInfo = true
                 }).catch(async error => {
                     if (error.response) {
                         context.commit('setError', error.response.data)

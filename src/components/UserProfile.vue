@@ -5,8 +5,8 @@
     <template #dropdown>
       <el-dropdown-menu>
         <el-dropdown-item disabled>你好,{{currentUser.name}}</el-dropdown-item>
-        <el-dropdown-item>查看个人资料</el-dropdown-item>
-        <el-dropdown-item>修改个人信息</el-dropdown-item>
+        <el-dropdown-item @click="$router.push('/dashboard/profile/')">查看个人资料</el-dropdown-item>
+        <el-dropdown-item @click="$router.push('/dashboard/profile/modify')">修改个人资料</el-dropdown-item>
         <el-dropdown-item @click="logout">登出</el-dropdown-item>
 
       </el-dropdown-menu>

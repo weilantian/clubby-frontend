@@ -1,6 +1,6 @@
 <template>
   <el-row justify="end">
-    <el-button @click="$router.push('/dashboard/user/create')" type="primary">添加人员</el-button>
+    <el-button v-if="authRole==='ADMIN'" @click="$router.push('/dashboard/user/create')" type="primary">添加人员</el-button>
     <el-button :loading="isUsersLoading">刷新</el-button>
   </el-row>
   <el-divider/>
@@ -33,7 +33,7 @@
               </div>
             </template>
           </el-table-column>
-          <el-table-column label="签到次数" prop="role" />
+          <el-table-column v-if="authRole==='ADMIN'" label="签到次数" prop="attendedCount" />
 
           <el-table-column width="300"  align="right">
             <template #header>
@@ -47,9 +47,9 @@
               >详情</el-button>
               <el-button
                   size="mini"
-
+                  v-if="authRole==='ADMIN'"
                   @click="handleDelete(scope.$index, scope.row)"
-              >出勤</el-button
+              >出勤记录</el-button
               >
             </template>
           </el-table-column>
@@ -68,7 +68,8 @@ import useDecodeRoles from "@/composables/useTextDecoder";
 export default {
   name: "People",
   computed: {
-    ...mapGetters('users',['users','isUsersLoading'])
+    ...mapGetters('users',['users','isUsersLoading']),
+    ...mapGetters(['authRole'])
   },
   setup() {
     const {decodeRole,decodeSex} = useDecodeRoles()

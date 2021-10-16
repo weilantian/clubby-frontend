@@ -59,6 +59,16 @@ const routes = [
         path:'profile/modify',
         name: "ModifyProfile",
         component: ()=> import(/* webpackChunkName: "profile"*/ "../views/Profile/EditProfile")
+      },
+      {
+        path: 'attendance/roll',
+        name:"RollCall",
+        component: ()=> import(/* webpackChunkName: "rollCall" */ "../views/RollCall/RollCall")
+      },
+      {
+        path: 'attendance/:id',
+        name:"AttendanceDetail",
+        component: ()=> import(/* webpackChunkName: "rollCallDetail"*/ "../views/RollCall/RollCallDetail")
       }
     ]
   },
@@ -73,7 +83,8 @@ const routes = [
   {
     path: '/login',
     component: ()=>import(/* webpackChunkName: "login"*/ '../views/Login')
-  }
+  },
+
 
 ]
 
@@ -85,10 +96,6 @@ const router = createRouter({
 router.beforeEach((to,from,next)=> {
   const autoNavigate = to.path !== '/activate' && to.path!=='/login'
   Promise.all([store.dispatch('checkAuth',autoNavigate)]).then(()=>next())
-
-
-
-
 })
 
 export default router

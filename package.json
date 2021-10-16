@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@element-plus/icons": "^0.0.11",
+    "@xstate/vue": "^0.8.1",
     "axios": "^0.21.4",
     "boxicons": "^2.0.9",
     "core-js": "^3.6.5",
@@ -16,7 +17,8 @@
     "vue": "^3.0.0",
     "vue-axios": "^3.3.7",
     "vue-router": "^4.0.0-0",
-    "vuex": "^4.0.0-0"
+    "vuex": "^4.0.0-0",
+    "xstate": "^4.25.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
