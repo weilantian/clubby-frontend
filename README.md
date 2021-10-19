@@ -1,5 +1,8 @@
 # clubby-frontend
 
+## Navigate to backend repository
+See [clubby-server](https://github.com/weilantian/clubby-server).
+
 ## Project setup
 ```
 npm install
